@@ -116,7 +116,9 @@ class FlamingLogo {
     }
 
     updatePositionAtRerender() {
-        this.logo.x = this.app.renderer.width / 2;
+        if (this.logo.x > this.app.renderer.width) {
+            this.logo.x = this.app.renderer.width - 50
+        }
         this.logo.y = this.app.renderer.height / 2;
         this.basicText.x = this.app.renderer.width / 2;
         this.basicText.y = this.app.renderer.height / 2;
