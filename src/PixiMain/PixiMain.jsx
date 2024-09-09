@@ -2,10 +2,9 @@ import { useEffect, useMemo } from "react";
 import PixiMainApp from "./PixiApp.js";
 
 const PixiMain = () => {
-    const APP = useMemo(() => new PixiMainApp(), []); // useMemo stellt sicher, dass die Instanz nur einmal erstellt wird
-
     useEffect(() => {
         document.querySelector('.pixi-app').innerHTML = null;
+        const APP = new PixiMainApp();
 
         const initPixi = async () => {
             await APP.initApp();
@@ -22,7 +21,7 @@ const PixiMain = () => {
         return () => {
             window.removeEventListener('resize', APP.screenResize);
         };
-    }, [APP]);
+    }, []);
 
     return (
         <div className="pixi-app"></div>

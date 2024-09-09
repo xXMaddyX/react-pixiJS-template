@@ -8,6 +8,9 @@ class FlamingLogo {
         this.isMovingLeft = false;
         this.isMovingRight = false;
         this.isPickedUp = false;
+        
+        this.isZoomIn = true
+        this.isZoomOut = false
 
         this.currentScreenSize = {
             width: window.innerWidth,
@@ -75,6 +78,7 @@ class FlamingLogo {
             if (!this.isPickedUp) {
                 this.checkState();
                 this.checkPosition();
+                this.zoomIn();
             }
         });
     }
@@ -89,6 +93,29 @@ class FlamingLogo {
     //CUSTOM_CLASS_FUNCTIONS------------------>
     stateMachine(newState) {
         this.currentState = newState;
+    }
+
+    zoomIn() {
+        if (this.logo.width > 400) {
+            this.isZoomIn = false
+            this.isZoomOut = true
+        }
+        if (this.logo.width < 50) {
+            this.isZoomIn = true
+            this.isZoomOut = false
+        }
+        this.changeZoom()
+    }
+
+    changeZoom() {
+        if (this.isZoomIn) {
+            this.logo.width += 1.05
+            this.logo.height += 1
+        }
+        if (this.isZoomOut) {
+            this.logo.width -= 1.05
+            this.logo.height -= 1
+        }
     }
     
     checkState() {
